@@ -19,6 +19,7 @@
 - Object Oriented Programming
 - Data Structures
 - Algorithms
+    - Computational Complexity
 
 <!-- /MarkdownTOC -->
 
@@ -273,3 +274,17 @@ car_t mycar;
 
 ## Algorithms
 
+### Computational Complexity
+
+Computational Complexity is used to determine how an algorithm will scale with very large input data. The worst case scenario of an algorithm is known as Big O notation. You can measure an algorithm by its ability to measure how it handles inputs. It's more important to care about the tendency of an algorithm and not the exact function associated with the algorithm. This tendency is defined by the highest order term since the lower order terms are not as effective with very large inputs. 
+
+Common Big O complexity:
+- O(1): constant time
+- O(log n): logarithmic time
+- O(n): linear time
+- O(n log n): linearithmic time
+- O(n**2): quadratic time
+- O(n**c): polynomial time
+- O(c**n): exponential time
+- O(n!): factorial time
+- O(infinity): infinite time
