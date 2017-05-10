@@ -8,6 +8,8 @@
     - ASCII
     - Binary
     - Hexadecimal
+    - Recursion
+    - Call Stack
 - Programming Languages
     - Java
     - C
@@ -77,6 +79,18 @@ Adding up the final row gives us 2560 + 208 + 12 = 2780. Going from decimal to h
 
 When we're looking at binary to hexadecimal, group four binary digits and use the mapping to convert the 4 binary digits to hexadecimal. The same process can be applied when we're looking at hexadecimal to binary. 
 
+### Recursion
+
+Recursion is a method of programming where a function invokes or executes itself to provide an elegant solution. All recursive functions need to meet two cases:
+- Base case: terminates the recursive function when condition is met
+- Recursive case: recursion will occur
+
+### Call Stack
+
+Each time a function is called, the system sets memory aside for that function and this chunk of memory is usually called a stack frame which lives on the stack. If the main function calls func1() which then calls func2(), all three functions will be on the stack. The most recently called function is always at the top of the stack (active frame). If a new function is called, that will be pushed onto the stack and when a function finishes its work (returns), it'll be popped off the stack and return access to the next frame on the stack and this next frame will pick up from when it called the popped function. 
+
+When a recursive function is called, each recursive function call will be pushed onto the stack. When the base case is met, the recursive function will sequentially pop off each stack frame returning a value to the next stack frame. 
+
 ## Programming Languages
 
 ### Java
@@ -136,6 +150,21 @@ pk = &k;
 ```
 
 If we assume the value of k is the same as it was originally. The first line says that pk gets the address of k and points there. Then go to the address that is pointed to by pk and change the value to 35. 
+
+#### File Pointers
+
+Files are useful to get input from files and also write to files to maintain relevant information. Working with files in C is done by file pointers (FILE*). File manipulation functions are in stdio.h and FILE* is the parameter to all the functions except for fopen() which is used to create a file pointer.
+```c
+FILE* ptr = fopen("file1.txt", "r");
+```
+The second argument of fopen could writing(w), reading(r), appending(a) which will start writing from the end of the file instead of writing which overwrites all previous written information. 
+```c
+fclose(ptr);
+```
+Fclose() cloeses the file. 
+
+Read the stdio.h documentation for more functions on files such as fgetc(), fputc(), fread(). 
+
 #### Arrays
 
 In C, arrays must have a fixed size when declaring an array so the computer system knows how much memory to assign for the variable. All elements of the array must be of the same type. 
@@ -159,6 +188,78 @@ float* heap_array = malloc(x * sizeof(float)); // Dynamic declaration which allo
 
 With static memory, all of the memory that was used on the stack as part of a function gets returned once you're done with the function. However, in dynamic memory, the memory is not returned once finished with the function which can result in memory leak. Free() can free any memory that is dynamically assigned. 
 
+#### Structures
+
+Structures allow us to group variables of different data types into a single variable name. A simple syntax example of structure is
+```c
+struct car {
+    int year;
+    char model[10];
+    char plate[7];
+    int odometer;
+    double engine_size;
+};
+```
+The variables inside the car struct are fields or members of the struct. 
+Structures are usually defined in a header file (.h) which can then be included into your main file. The dot operator is used to access the members of the struct. 
+
+```c
+struct car mycar; // variable declaration of type struct
+
+// field accessing
+mycar.year = 2011;
+mycar.odometer = 50505;
+```
+
+Structures can have memory dynamically allocated to them instead of statically allocated. 
+
+```c
+// variable declaration using malloc
+struct car *mycar = malloc(sizeof(struct car));
+
+// field accessing
+(*mycar).year = 2011;
+(*mycar).odometer = 50505;
+```
+
+The last two lines shows how to access a field using dynamically allocated memory or a pointer. There is a far more efficient way to access the field which is by using the arrow operator (->). 
+
+```c
+// Arrow operator
+mycar->year = 2011;
+mycar->odometer = 50505;
+```
+
+The arrow operator first dereferences the pointer on the left side of the operator and then accesses the field on the right side of the operator. 
+
+#### Custom Data Types
+
+It's possible to define custom data types at the top of .c or .h files using the typedef keyword. Typedef redefines a new custom data keyword. 
+
+```c
+typedef char* string; // Redefines a char* pointer to a string
+
+typedef struct car {
+    int year;
+    char model[10];
+    char plate[7];
+    int odometer;
+    double engine_size;
+}
+car_t;
+// Above is essentially equivalent but we've also defined the structure within
+typedef struct car car_t;
+```
+
+Creating a custom data type using typedef for a struct simplifies the initialization process. An example is
+
+```c
+// No typedef used
+struct car mycar;
+
+// Typedef used
+car_t mycar;
+```
 
 ### Python
 
