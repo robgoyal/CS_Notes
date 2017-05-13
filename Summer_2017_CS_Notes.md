@@ -18,10 +18,15 @@
     - Lisp
 - Object Oriented Programming
 - Data Structures
+    - Arrays
+    - Linked Lists
+    - Stacks
+    - Queue
 - Algorithms
     - Computational Complexity
 
 <!-- /MarkdownTOC -->
+
 
 
 ## General Topics of CS
@@ -88,7 +93,7 @@ Recursion is a method of programming where a function invokes or executes itself
 
 ### Call Stack
 
-Each time a function is called, the system sets memory aside for that function and this chunk of memory is usually called a stack frame which lives on the stack. If the main function calls func1() which then calls func2(), all three functions will be on the stack. The most recently called function is always at the top of the stack (active frame). If a new function is called, that will be pushed onto the stack and when a function finishes its work (returns), it'll be popped off the stack and return access to the next frame on the stack and this next frame will pick up from when it called the popped function. 
+Each time a function is called, the system sets memory aside for that function and this chunk of memory is usually called a stack frame which lives on the stack. This is memory that is statically declared in C  If the main function calls func1() which then calls func2(), all three functions will be on the stack. The most recently called function is always at the top of the stack (active frame). If a new function is called, that will be pushed onto the stack and when a function finishes its work (returns), it'll be popped off the stack and return access to the next frame on the stack and this next frame will pick up from when it called the popped function. 
 
 When a recursive function is called, each recursive function call will be pushed onto the stack. When the base case is met, the recursive function will sequentially pop off each stack frame returning a value to the next stack frame. 
 
@@ -111,8 +116,13 @@ In C, data types have different memory sizes
 |long long| 8|
 |char*, int*, etc| 4 or 8|
 
-The last line is 4 or 8 because it depends if its a 32 bit system or 64 bit system. That's how much memory you could there
+The last line is 4 or 8 bytes because it depends if its a 32 bit system or 64 bit system.
 
+The size of data types is highly dependent on the machine so an int may not always be 4 bytes. It could be 8 bytes as well. 
+
+Doubles provide a higher precision than floats and the C compiler will generally convert a float to a double unless you append f or F at the end of a floating point number (32.4f). 
+
+A char is a 1 byte variable which can be represented by Ascii values. 
 
 #### Pointers
 
@@ -233,6 +243,17 @@ mycar->odometer = 50505;
 
 The arrow operator first dereferences the pointer on the left side of the operator and then accesses the field on the right side of the operator. 
 
+It's also possible to have temporary names for struct that are self referntial within the structure itself. 
+
+```c
+type struct sllist
+{
+    int val;
+    struct sllist* next;
+} sllnode;
+```
+
+Sllist is the temporary name for the struct which can then be created within the body of the struct itself to create another node. Sllnode is the permanent name for the structure. 
 #### Custom Data Types
 
 It's possible to define custom data types at the top of .c or .h files using the typedef keyword. Typedef redefines a new custom data keyword. 
@@ -271,6 +292,46 @@ car_t mycar;
 ## Object Oriented Programming
 
 ## Data Structures
+
+### Arrays
+
+Arrays are great for holding data that is of fixed size with similar data types. A key issue with arrays is the amount of work required to insert something at some point in the array (excluding the end) because everything has to be moved over. Linked Lists can be more beneficial in this case. 
+
+### Linked Lists
+
+#### Singly Linked List
+
+A linked list consists of nodes which is comprised of two members:
+- data of some type
+- pointer to another node
+
+Linked Lists have a few important operations:
+- Create linked list
+- Search through to find element
+- Insert new node into linked list
+- Delete entire linked list
+
+A singly linked list can create a linked list, insert more elements to the linked list, find an element within the list and also delete the entire linked list freeing up all the memory that was used. Two key points are that
+1. Inserting an element only inserts it at the beginning of the list so that we dont have to traverse through the list
+2. We can only move in one direction (traverse forwards, not backwards) so we cannot delete a single element in the linked list
+
+#### Doubly Linked List
+
+A doubly linked list allows us to traverse forwards and backwards by including a pointer to the previous node. This will allow us to also delete a single element in the list unlike the singly linked list. 
+
+### Stacks
+
+A stack can be implemented using an array or a linkedlist. A stack can is a LIFO (Last In, First out) data structure. So the only most recently added element can be removed from the stack. There are two core operations with a stack:
+1. Push: Add new element to the stack
+2. Pop: Remove the top most element on the stack
+
+Implementing a stack using an array will only allow us to have a fixed size stack whereas a linked list implementation can have any size. 
+
+### Queue
+
+A queue can also be implemented as an array or a linked list. A queue is a FIFO (First In, First Out) data structure. The first element that is added to the queue will also be the first element to be removed. Two core operations with a queue are:
+1. Enqueue: Add element to end of queue
+2. Dequeue: Remove oldest element from front of queue
 
 ## Algorithms
 
