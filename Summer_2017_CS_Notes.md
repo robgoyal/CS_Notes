@@ -31,7 +31,28 @@
 
 ## General Topics of CS
 
-### 
+### Version Control (Git)
+
+Version control is a useful way to keep track of software and any changes associated with the software. Git is an example of version control software. 
+
+The basic git commands are:
+
+- git init: Initialize an empty git repository
+- git status: Returns the status of the repository indicating new files, untracked files, modified files
+- git add: Add any files for staging
+- git commit: Commit staged changes to the repository
+    - Use "-m" to add a commit message
+    - Default parameter sends you to VIM to include commit message
+- git log: Return commit history of repository
+- git branch branchName: create a new branch
+- git checkout branchName: switch to a branch
+- git clone: Clone an existing remote repository
+- git push: Push a committed change to a remote repository
+- git fetch: Fetch the contents of a remote repository
+- git merge: Merge the fetched contents of a remote repository into the local repository
+- git pull: Fetch and merge step is combined
+- git stash: Stash files that havent been committed in a branch so they arent deleted while switching branches
+
 
 ### ASCII
 
